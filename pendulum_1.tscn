@@ -1,0 +1,105 @@
+[gd_scene load_steps=15 format=3 uid="uid://bd3s4gfsb5oos"]
+
+[ext_resource type="Script" path="res://pendulum_1.cs" id="1_wwva7"]
+[ext_resource type="Texture2D" uid="uid://d0f6fagyo3vqt" path="res://kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/dark/texture_12.png" id="2_d4h36"]
+[ext_resource type="Texture2D" uid="uid://co6ehtbaxaqjx" path="res://kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/green/texture_03.png" id="3_tbjuv"]
+[ext_resource type="Texture2D" uid="uid://dll6iwhgbnqmh" path="res://kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/kenney-prototype-textures-db6622fbe90621eed70a0b417ae8d97281f45e6c/addons/kenney_prototype_textures/orange/texture_02.png" id="4_2d1bv"]
+[ext_resource type="PackedScene" uid="uid://dgxwvehspcn4u" path="res://Models381/SpringModel.tscn" id="5_b5uka"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_rmmdk"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_fqjf5"]
+sky_material = SubResource("ProceduralSkyMaterial_rmmdk")
+
+[sub_resource type="Environment" id="Environment_rvsg1"]
+background_mode = 2
+sky = SubResource("Sky_fqjf5")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vboqi"]
+albedo_texture = ExtResource("2_d4h36")
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ueq7h"]
+size = Vector2(4, 4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cxgsj"]
+albedo_texture = ExtResource("3_tbjuv")
+
+[sub_resource type="BoxMesh" id="BoxMesh_oupl8"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wmkv"]
+albedo_texture = ExtResource("4_2d1bv")
+
+[sub_resource type="SphereMesh" id="SphereMesh_aadg6"]
+radius = 0.05
+height = 0.1
+
+[node name="Pendulum1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0149852, -0.0153776, -0.0100408)
+script = ExtResource("1_wwva7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_rvsg1")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.018685, 0)
+material_override = SubResource("StandardMaterial3D_vboqi")
+mesh = SubResource("PlaneMesh_ueq7h")
+
+[node name="Anchor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = SubResource("StandardMaterial3D_cxgsj")
+mesh = SubResource("BoxMesh_oupl8")
+
+[node name="Ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)
+material_override = SubResource("StandardMaterial3D_1wmkv")
+mesh = SubResource("SphereMesh_aadg6")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0.000785398, 0, 1, 0, -0.000785398, 0, 1, 0, 0.850637, 1.73372)
+
+[node name="SpringModel" parent="." instance=ExtResource("5_b5uka")]
+
+[node name="XCoord" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="YCoord" type="Label" parent="."]
+offset_left = 2.0
+offset_top = 28.0
+offset_right = 40.0
+offset_bottom = 51.0
+
+[node name="ZCoord" type="Label" parent="."]
+offset_left = -1.0
+offset_top = 63.0
+offset_right = 39.0
+offset_bottom = 86.0
+
+[node name="PE" type="Label" parent="."]
+offset_left = -1.0
+offset_top = 130.0
+offset_right = 40.0
+offset_bottom = 153.0
+
+[node name="KE" type="Label" parent="."]
+offset_left = -1.0
+offset_top = 154.0
+offset_right = 39.0
+offset_bottom = 177.0
+
+[node name="Total Energy" type="Label" parent="."]
+offset_left = -1.0
+offset_top = 182.0
+offset_right = 39.0
+offset_bottom = 205.0
