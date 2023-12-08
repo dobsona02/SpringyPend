@@ -14,6 +14,7 @@ public partial class pendulum_1 : Node3D
 	Label TotalEnergy;
 
 	SpringyPendSim pend;
+    Simulator sim;
 	
 	double xA, yA, zA; // coords of anchor
 	float length; // length of pendulum
@@ -92,6 +93,14 @@ public partial class pendulum_1 : Node3D
         time += delta;
 
 	}
+
+    // public override void _PhysicsProcess(double delta)
+    // {
+    //     base._PhysicsProcess(delta);
+
+    //     sim.Step(time, delta);
+    // }
+
 
 	private void PlacePendulum(Vector3 endBB)
     {
