@@ -26,6 +26,7 @@ public partial class pendulum_1 : Node3D
 
 	Vector3 endA; // end point of anchor
 	Vector3 endB; // end point for pendulum bob
+    
 
  
 	// Called when the node enters the scene tree for the first time.
@@ -77,13 +78,13 @@ public partial class pendulum_1 : Node3D
         Energy = pend.CalcEnergy(endA);
         
 
-        // //Display the energy
+         //Display the energy
         PE.Text = Energy[0].ToString("0.00");
         KE.Text = Energy[1].ToString("0.00");
         TotalEnergy.Text = Energy[2].ToString("0.00");
 
         //pend.StepRK2(time, delta, endA);
-        pend.StepRK4(time, delta, endA);
+        //pend.StepRK4(time, delta, endA);
 
         
         endB.X = (float)pend.XCoord;
@@ -94,12 +95,13 @@ public partial class pendulum_1 : Node3D
 
 	}
 
-    // public override void _PhysicsProcess(double delta)
-    // {
-    //     base._PhysicsProcess(delta);
+    public override void _PhysicsProcess(double delta)
+    {
+        base._PhysicsProcess(delta);
 
-    //     sim.Step(time, delta);
-    // }
+        pend.Step(time, delta);
+        time += delta;
+    }
 
 
 	private void PlacePendulum(Vector3 endBB)

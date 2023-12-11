@@ -2,6 +2,7 @@
 // Simulator.cs : Defines the base class for creating simulations.
 //============================================================================
 using System;
+using Godot;
 
 public class Simulator
 {
